@@ -12,7 +12,7 @@ import java.util.Properties;
 public class BaseDriver {
     protected BaseDriver(){}//Not allow to create instance from BaseTest, only inheritance
 
-    private static  WebDriver driver;
+    private   WebDriver driver;
 
 
     @BeforeMethod
@@ -20,8 +20,10 @@ public class BaseDriver {
 
         String a = PropertiesReader.returnKey(Configurations.BROWSER);
         System.out.println(a);
+
         if (driver == null) {
            driver = BrowserFactory.generateWebDriver();
+           ParallelDriver.getInstanceParallelDriver().setWebDriver(driver);
         }
 
 
@@ -35,9 +37,9 @@ public class BaseDriver {
         }
     }
 
-    public static WebDriver getDriverBaseTest(){
+/*    public static WebDriver getDriverBaseTest(){
 return driver;
-    }
+    }*/
 
 
 
