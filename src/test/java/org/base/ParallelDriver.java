@@ -2,7 +2,7 @@ package org.base;
 
 import org.openqa.selenium.WebDriver;
 
-public final class ParallelDriver {
+public final class ParallelDriver {// Using singleton approach to get only one instance
 
     private ParallelDriver(){};
 
@@ -13,7 +13,7 @@ public final class ParallelDriver {
    private ThreadLocal<WebDriver> threadLocalWebDriver = new ThreadLocal<>();
 
 
-    public WebDriver getThreadLocalWebDriver() {
+    public WebDriver getWebDriver() {
         return threadLocalWebDriver.get();
     }
 
