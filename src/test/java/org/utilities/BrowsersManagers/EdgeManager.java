@@ -1,6 +1,7 @@
 package org.utilities.BrowsersManagers;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -17,10 +18,10 @@ public class EdgeManager {
         EdgeOptions edgeOptions = new EdgeOptions();
         return new EdgeDriver(edgeOptions);
     }
-    public static RemoteWebDriver edgeManagerRemote(String browserName){
+    public static RemoteWebDriver edgeManagerRemote(){
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", browserName);//map.get("Browser") || String browser
+        capabilities.setCapability("browserName", Constants.getBrowser());//map.get("Browser") || String browser
         capabilities.setCapability("browserVersion", "114.0");   // Usa "browserVersion" en lugar de "chromeVersion"
         capabilities.setCapability("acceptInsecureCerts", true);
         //capabilities.setCapability("platformName", "WINDOWS");
