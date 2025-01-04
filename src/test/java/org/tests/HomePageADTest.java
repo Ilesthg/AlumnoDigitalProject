@@ -11,7 +11,10 @@ public final class HomePageADTest extends BaseDriver {
 
     @Test
     public void loginTest(){
-        LoginPageAD.loginMethod().closeMessages();
+       // LoginPageAD.loginMethod().closeMessages();
+        LoginPageAD loginPageAD = new LoginPageAD();
+        loginPageAD.loginMethod().closeMessages();
+
         //HomePageAD.getMenu("Capturas");
         //HomePageAD.getSubMenu("Capturas","Actualización de datos de padres");
     }

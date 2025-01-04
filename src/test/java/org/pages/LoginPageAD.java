@@ -12,15 +12,25 @@ import java.util.List;
 
 public final class LoginPageAD {
 
+
     private static final By inputEmail = By.xpath("//input[@name='ctl00$ContentPlaceHolder1$Login2$UserName']");
     private static final By inputPassword = By.xpath("//input[@name='ctl00$ContentPlaceHolder1$Login2$Password']");
     private static final By buttonIngresar = By.xpath("//input[@name= 'ctl00$ContentPlaceHolder1$Login2$LoginButton']");
-    private static By linkCtrlEscolar = By.xpath("//ul[@id='ic-menu']//a[@href='#']");
+    private static final By linkCtrlEscolar = By.xpath("//ul[@id='ic-menu']//a[@href='#']");
     private static final By messages = By.xpath("//div[@id= 'toast-container']//div[@class = 'toast toast-warning']");
 
+    private static final By mandatoryUsername = By.xpath("//span[@id='ContentPlaceHolder1_Login2_UserNameRequired']");
+    private static final By mandatoryPassword = By.xpath("//span[@id='ContentPlaceHolder1_Login2_PasswordRequired']");
 
-    public static LoginPageAD loginMethod() {
-        WebDriver driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
+
+    WebDriver driver;
+
+    public LoginPageAD() {
+        this.driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
+    }
+
+    public LoginPageAD loginMethod() {
+
         driver.findElement(inputEmail).sendKeys("25epr0175u");
         driver.findElement(inputPassword).sendKeys("S");
         driver.findElement(buttonIngresar).click();
@@ -28,16 +38,30 @@ public final class LoginPageAD {
         return new LoginPageAD();
     }
 
-    public static void closeMessages() {
-        WebDriver driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
+    /*public boolean errorMessageDisplayed(){
+        return driver.findElement();
+    }*/
+
+    public Boolean mandatoryFieldsPresent() {
+        if (driver.findElement(mandatoryUsername).isDisplayed() || driver.findElement(mandatoryPassword).isDisplayed()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isRedirected() {
+        return driver.getCurrentUrl().equalsIgnoreCase("https://siee.sepyc.gob.mx/Sistemas/seleccionarSistema.aspx");
+    }
+
+
+    public void closeMessages() {
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         List<WebElement> elementList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(messages));
-
 
         for (int i = 0; i < elementList.size(); i++) {
             elementList.get(i).click();
         }
-
     }
-
 }

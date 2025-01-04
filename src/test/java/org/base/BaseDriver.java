@@ -31,9 +31,9 @@ public class BaseDriver {
 
  @AfterMethod
     public void closeDriver() {
-    /*    if (driver != null) {
+        if (driver != null) {
             driver.close();
-        }*/
+        }
     }
 
 /*    public static WebDriver getDriverBaseTest(){
