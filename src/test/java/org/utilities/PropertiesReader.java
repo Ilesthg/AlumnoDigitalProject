@@ -1,13 +1,10 @@
-package org.resources;
+package org.utilities;
 
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.util.StringUtil;
 import org.enums.Configurations;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Properties;
 
 
@@ -20,7 +17,7 @@ import java.util.Properties;
 
 //--> Use FileReader: For external, user-editable configuration files.
 public class PropertiesReader {
-    static Properties prop = new Properties();
+    private static Properties prop = new Properties();
 
     static {
         try (FileReader fr = new FileReader(System.getProperty("user.dir") + "/src/test/java/org/resources/Configurations.properties")) {
@@ -33,21 +30,23 @@ public class PropertiesReader {
 
 
     public static String returnKey(Configurations config) {
-        if (config == null) {
+       /* if (config == null) {
             throw new RuntimeException("Configuration cannot be null");
-        }
+        }*/
         String key = config.toString().toLowerCase();
         if (StringUtil.isBlank(key)) {
             throw new RuntimeException("Value is blank for the key provided");
         }
         String valueToReturn = prop.getProperty(key);
         if (valueToReturn == null) {
-            throw new RuntimeException("Key '" + key + "' is not present properties files");
+            throw new RuntimeException("Key '" + key + "' is not present in the properties file. Available keys: " + getAvailableKeys());
         }
         return valueToReturn;
     }
-
-    public static String getProperty(String key, String defaultValue) {
+    private static String getAvailableKeys() {
+        return String.join(", ", prop.stringPropertyNames());
+    }
+    public static String returnKey(String key, String defaultValue) {
         return prop.getProperty(key, defaultValue);
     }
 

@@ -3,8 +3,9 @@ package org.pages;
 import org.base.ParallelDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.utilities.CustomMethods;
 
-public final class HomePageAD {
+public final class HomePageAD extends CustomMethods {
     //translate will normalize the Dom, and make the value to lowerCase
 
     private static final String menu = "//div[@id = 'menuContainer']/child::ul/child::li/a[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '%s']";

@@ -5,7 +5,7 @@ import org.enums.Browsers;
 import org.enums.Configurations;
 import org.enums.RunMode;
 import org.enums.WebPlatform;
-import org.resources.PropertiesReader;
+import org.utilities.PropertiesReader;
 
 public final class Constants {
 

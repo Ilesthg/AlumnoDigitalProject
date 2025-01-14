@@ -1,39 +1,35 @@
 package org.base;
 
-import org.enums.Configurations;
 import org.openqa.selenium.WebDriver;
-import org.resources.PropertiesReader;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+
+import java.util.Objects;
 
 public class BaseDriver {
     protected BaseDriver() {
-    }//Not allow to create instance from BaseTest, only inheritance
+    }
 
     private WebDriver driver;
 
 
-@BeforeMethod
-    public void initDriver() {
-
-
-        if (driver == null) {
-            driver = BrowserFactory.generateWebDriver();
-            ParallelDriver.getInstanceParallelDriver().setWebDriver(driver);
-        }
-        //ParallelDriver.getInstanceParallelDriver().getWebDriver().get("https://siee.sepyc.gob.mx/");
-        // ParallelDriver.getInstanceParallelDriver().getWebDriver().manage().window().maximize();
-        driver.get("https://siee.sepyc.gob.mx/");
-        driver.manage().window().maximize(); // Maximiza la ventana del navegador
+    @BeforeMethod
+    protected void initDriver() {
+        WebDriver driver = BrowserFactory.generateWebDriver();
+        ParallelDriver.getInstanceParallelDriver().setWebDriver(driver);
+        this.driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
+        this.driver.get("https://siee.sepyc.gob.mx/");
+        this.driver.manage().window().maximize();
 
     }
 
 
  @AfterMethod
-    public void closeDriver() {
-    /*    if (driver != null) {
-            driver.close();
-        }*/
+ protected void closeDriver() {
+            ParallelDriver.getInstanceParallelDriver().closeWebDriver();
+
     }
 
 /*    public static WebDriver getDriverBaseTest(){
@@ -42,3 +38,9 @@ return driver;
 
 
 }
+
+
+
+
+
+
