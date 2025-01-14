@@ -1,5 +1,7 @@
 package utilities;
 
+import br.com.six2six.fixturefactory.Fixture;
+import fixtures.model.BajaAlumnoPOJO;
 import org.testng.annotations.DataProvider;
 import utilities.datareader.ExcelReader;
 
@@ -41,10 +43,35 @@ public class DataProviderFiltered {
 
 
     //&& hashMaps.get("execute").equalsIgnoreCase("y")
-
-
-
     @DataProvider(name = "DataFiltered")
+    public Object[][] dataProviderFiltered(Method m){
+        List<HashMap<String,String>> hashMapList =
+                ExcelReader.excelReader("Data");
+
+        List<Object> endResult= new ArrayList<>();
+
+        for(HashMap<String,String> hashMaps: hashMapList){
+            if (m.getName().startsWith(hashMaps.get("expected")) && hashMaps.get("execute").equalsIgnoreCase("yes")) {
+                endResult.add(hashMaps);
+            }
+        }
+
+
+        Object[][] combinedData = new Object[endResult.size()][2];
+
+        //data from fixture
+        List<BajaAlumnoPOJO> fixtureData = Fixture.from(BajaAlumnoPOJO.class).gimme(2, "valid");
+
+        for (int i = 0; i < endResult.size(); i++) {
+            combinedData[i][0] = endResult.get(i); // First parameter: existing data
+            combinedData[i][1] = fixtureData.get(i % fixtureData.size()); // Second parameter: fixture data
+        }
+
+        return combinedData;
+    }
+
+
+   /* @DataProvider(name = "DataFiltered")
     public Object[] dataProviderFiltered(Method m){
         List<HashMap<String,String>> hashMapList =
                 ExcelReader.excelReader("Data");
@@ -58,5 +85,5 @@ public class DataProviderFiltered {
         }
 
         return endResult.toArray();
-    }
+    }*/
 }

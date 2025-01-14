@@ -1,4 +1,4 @@
-package pages.homepage.enums;
+package pages.enums;
 
 public enum MENUS {
 

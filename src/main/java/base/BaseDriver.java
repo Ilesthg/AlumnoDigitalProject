@@ -1,6 +1,7 @@
 package base;
 
 import base.webdrivers.WebDFactory;
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
@@ -12,7 +13,10 @@ public class BaseDriver {
 
     private WebDriver driver;
 
-
+    @BeforeSuite
+    public void loadtemplates() {
+        FixtureFactoryLoader.loadTemplates("fixtures.template");
+    }
     @BeforeMethod
     protected void initDriver() {
         WebDriver driver = WebDFactory.generateWebDriver();
@@ -24,11 +28,11 @@ public class BaseDriver {
         this.driver.manage().window().maximize();
 
     }
-    @AfterMethod
+   /* @AfterMethod
     protected void closeDriver() {
         ParallelDriver.getInstanceParallelDriver().closeWebDriver();
 
-    }
+    }*/
     protected String getUrl() {
         return Constants.getUrl();
     }

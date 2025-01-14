@@ -1,10 +1,8 @@
-package pages.homepage;
+package pages;
 
-import enums.ExplicitWaitStrategy;
-import org.openqa.selenium.By;
-import pages.homepage.components.TopMenuComponentHomePage;
-import pages.homepage.enums.MENUS;
-import pages.homepage.enums.SUBMENU;
+import pages.page_components.TopMenuComponent;
+import pages.enums.MENUS;
+import pages.enums.SUBMENU;
 import utilities.CustomMethods;
 
 public final class HomePageAD extends CustomMethods {
@@ -16,14 +14,29 @@ public final class HomePageAD extends CustomMethods {
         private static final String SUBMENU = "SubMenu";*/
     private static final String menu = "//div[@id = 'menuContainer']/child::ul/child::li/a[(text()= '%s')]";
     private static final String subMenu = "//div[@id = 'menuContainer']/ul/li/ul/li/a[(text()= '%s')]";
-    private TopMenuComponentHomePage topMenuComponentHomePage;
+    private TopMenuComponent topMenuComponent;
 
     //Constructor
     public HomePageAD() {
-        topMenuComponentHomePage = new TopMenuComponentHomePage();
+        topMenuComponent = new TopMenuComponent();
     }
 
-    private static By getXPathWith(String xpath, Object... replacement) {
+    public TopMenuComponent getTopMenuComponentHomePage() {
+        return topMenuComponent;
+    }
+
+    public void navigateActaulizarPadres(){
+     topMenuComponent.clickMenu(MENUS.CAPTURAS)
+                .clickSubMenu(SUBMENU.ACTUALIZACION_DE_DATOS_PADRES);
+    }
+
+    public BajaAlumnos navigateToBajaAlumno(){
+        topMenuComponent.clickMenu(MENUS.CAPTURAS);
+        topMenuComponent.clickSubMenu(SUBMENU.BAJA_ALUMNO);
+        return new BajaAlumnos();
+    }
+
+ /*   private static By getXPathWith(String xpath, Object... replacement) {
         String resolvedXPath = String.format(xpath, replacement);
         return By.xpath(resolvedXPath);
 
@@ -37,7 +50,7 @@ public final class HomePageAD extends CustomMethods {
     public void clickSubMenu(SUBMENU subMenuFromTest) {//MENUS menuFromTest,
         //clickMenu(menuFromTest);
         click(getXPathWith(subMenu, subMenuFromTest.getName()), subMenuFromTest.getName(), ExplicitWaitStrategy.CLICKABLE);
-    }
+    }*/
 
 /*
   public void clickMenu(String menu) {

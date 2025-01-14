@@ -50,9 +50,10 @@ public class CustomMethods {
             throw new RuntimeException("Failed to send keys to element located by: " + by, e);
         }
     }
+
     protected void click(WebElement webElement,String element) {
         try {
-            webElement.click();
+            wait.until(ExpectedConditions.elementToBeClickable(webElement)).click();
             //  System.out.println("Click Method SUCCESS, able to click key on element: ->" + element);
             ExtentLogger.passMessage("Click Method SUCCESS, able to click key on element: ->" + element);
         } catch (Exception e) {

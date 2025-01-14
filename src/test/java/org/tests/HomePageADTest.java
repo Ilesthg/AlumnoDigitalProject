@@ -3,8 +3,6 @@ package org.tests;
 import base.BaseDriver;
 import pages.LoginPageAD;
 import org.testng.annotations.Test;
-import pages.homepage.enums.MENUS;
-import pages.homepage.enums.SUBMENU;
 import utilities.DataProviderFiltered;
 
 import java.util.HashMap;
@@ -19,11 +17,9 @@ public final class HomePageADTest extends BaseDriver {
 
        new LoginPageAD()
                .validLogin(data)
-               .clickMenu(MENUS.CAPTURAS)
-               .clickSubMenu(SUBMENU.ACTUALIZACION_DE_DATOS_PADRES);
+               .navigateActaulizarPadres();
 
-     //   homePageAD.clickMenu(MENUS.CONSULAS);
-      //  loginPageAD.validLogin(data).getMenu("consultas");
+
 
     }
 

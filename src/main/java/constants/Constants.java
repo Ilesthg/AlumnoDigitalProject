@@ -2,7 +2,7 @@ package constants;
 
 
 import enums.*;
-import io.appium.java_client.remote.MobilePlatform;
+
 import utilities.datareader.PropertiesReader;
 
 public final class Constants {

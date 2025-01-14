@@ -1,4 +1,4 @@
-package pages.homepage.enums;
+package pages.enums;
 
 public enum SUBMENU {
     ACTUALIZACION_DE_DATOS_PADRES("Actualización de datos de padres"),
@@ -9,7 +9,8 @@ public enum SUBMENU {
     ACTUALIZACION_DE_DATOS_ALUMNO("Actualización de información para la atención del alumno"),
     TRALADO_DE_ALUMNOS("Traslado de alumnos"),
     AUTONOMIA_CURRICULAR("Autonomía Curricular"),
-    CONTACTOS_CENTRO_TRABAJO("Contactos de Centros de Trabajo");
+    CONTACTOS_CENTRO_TRABAJO("Contactos de Centros de Trabajo"),
+    BAJA_ALUMNO("Baja de alumnos");
 
 
     /*

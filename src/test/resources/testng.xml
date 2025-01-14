@@ -16,9 +16,9 @@
                     <include name="invalidLoginTest"/>
                 </methods>
             </class>-->
-            <class name="org.tests.HomePageADTest">
+            <class name="org.tests.BajaAlumnoTest">
                 <methods>
-                    <include name="validHomePageTest"/>
+                    <include name="validBajaAlumno"/>
                 </methods>
             </class>
 

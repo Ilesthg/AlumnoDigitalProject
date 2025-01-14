@@ -5,7 +5,6 @@ import enums.ExplicitWaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pages.homepage.HomePageAD;
 import utilities.CustomMethods;
 
 import java.util.HashMap;
@@ -72,7 +71,7 @@ public final class LoginPageAD extends CustomMethods {
 
         for (int i = 0; i < elementList.size(); i++) {
             System.out.println( elementList.get(i).getText());
-            elementList.get(i).click();
+           // elementList.get(i).click();
             click(elementList.get(i), elementList.get(i).getText());
         }
     }
