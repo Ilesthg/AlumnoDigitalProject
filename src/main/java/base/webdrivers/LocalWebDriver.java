@@ -1,4 +1,4 @@
-package base;
+package base.webdrivers;
 
 import constants.Constants;
 import enums.Browsers;
@@ -9,9 +9,9 @@ import utilities.BrowserManagers.EdgeManager;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-public final class LocalDriver {
+public final class LocalWebDriver {
 
-    private LocalDriver() {
+    private LocalWebDriver() {
     }
 
 
@@ -21,7 +21,7 @@ public final class LocalDriver {
                 HashMap<Browsers, Supplier<WebDriver>> hmm = new HashMap<>();
 
                 hmm.put(Browsers.CHROME, ChromeManager::chromeManagerLocal);
-                hmm.put(Browsers.EDGE, () -> EdgeManager.edgeManagerLocal());
+                hmm.put(Browsers.EDGE, EdgeManager::edgeManagerLocal);
                 // hmm.put(BrowserType.FIREFOX, return new FirefoxDriver());
 
                 return hmm.get(Constants.getBrowserEnum()).get();

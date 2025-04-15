@@ -1,10 +1,8 @@
 package constants;
 
 
-import enums.Browsers;
-import enums.Configurations;
-import enums.RunMode;
-import enums.WebPlatform;
+import enums.*;
+import io.appium.java_client.remote.MobilePlatform;
 import utilities.datareader.PropertiesReader;
 
 public final class Constants {
@@ -16,9 +14,18 @@ public final class Constants {
 
 
     private static final String BROWSER = PropertiesReader.returnKey(Configurations.BROWSER);
-    private static final String RUNMODE = PropertiesReader.returnKey(Configurations.RUNMODE);
+    private static final String WEBRUNMODE = PropertiesReader.returnKey(Configurations.WEBRUNMODE);
     private static final String WEBPLATFORM = PropertiesReader.returnKey(Configurations.WEBPLATFORM);
+
+
+    private static final String MOBILERUNMODE = PropertiesReader.returnKey(Configurations.MOBILERUNMODE);
+    private static final String MOBILEDEVICE = PropertiesReader.returnKey(Configurations.MOBILEDEVICE);
+    private static final String MOBILEPLATFORM = PropertiesReader.returnKey(Configurations.MOBILEPLATFORM);
+
+
+
     private static final String URL = PropertiesReader.returnKey(Configurations.URL);
+
     private static  String dirForCreateExtentReport = "";
 
 
@@ -29,8 +36,8 @@ public final class Constants {
         return BROWSER;
     }
 
-    public static String getRunmode() {
-        return RUNMODE;
+    public static String getWebrunmode() {
+        return WEBRUNMODE;
     }
 
     public static String getWEBPLATFORM() {
@@ -58,17 +65,27 @@ public final class Constants {
 
 
     public static Browsers getBrowserEnum() {
-        System.out.println(Browsers.valueOf(BROWSER.toUpperCase()));
         return Browsers.valueOf(BROWSER.toUpperCase());
     }
 
-    public static RunMode getRunModeEnum() {
-        System.out.println(RunMode.valueOf(RUNMODE.toUpperCase()));
-        return RunMode.valueOf(RUNMODE.toUpperCase());
+    public static MobileDevice getMobileDevice() {
+        return MobileDevice.valueOf(MOBILEDEVICE.toUpperCase());
     }
 
+    public static RunMode getWebRunModeEnum() {
+        return RunMode.valueOf(WEBRUNMODE.toUpperCase());
+    }
+    public static RunMode getMobileRunModeEnum() {
+        return RunMode.valueOf(MOBILERUNMODE.toUpperCase());
+    }
+
+ /*   public static MobilePlatform getMobilePlatformEnum() {
+        System.out.println(WebPlatform.valueOf(MOBILEPLATFORM.toUpperCase()));
+        return MOBILEPLATFORM.valueOf(MOBILEPLATFORM.toUpperCase());
+    }*/
+
+
     public static WebPlatform getWebPlatformEnum() {
-        System.out.println(WebPlatform.valueOf(WEBPLATFORM.toUpperCase()));
         return WebPlatform.valueOf(WEBPLATFORM.toUpperCase());
     }
 }

@@ -23,6 +23,7 @@
         <xmlbeans.version>5.0.3</xmlbeans.version>
         <extentreports.version>5.0.9</extentreports.version>
         <reportng.version>1.1.4</reportng.version>
+        <appium.java.version>8.3.0</appium.java.version>
     </properties>
 
 
@@ -135,11 +136,23 @@
             <version>${extentreports.version}</version>
         </dependency>
 
+
+
         <dependency>
             <groupId>org.uncommons</groupId>
             <artifactId>reportng</artifactId>
             <version>${reportng.version}</version>
             <scope>test</scope>
+        </dependency>
+
+
+
+
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>${appium.java.version}</version>
         </dependency>
     </dependencies>
 

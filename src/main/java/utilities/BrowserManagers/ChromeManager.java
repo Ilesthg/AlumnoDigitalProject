@@ -4,18 +4,25 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import constants.Constants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChromeManager {
     private ChromeManager(){}
     public static WebDriver chromeManagerLocal(){
         try {
             WebDriverManager.chromedriver().setup();
-            return new ChromeDriver();
+            // Create ChromeOptions to configure browser settings
+            ChromeOptions options = new ChromeOptions();
+
+            options.addArguments("--disable-features=PasswordBreachDetection");
+            return new ChromeDriver(options);
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize Local ChromeDriver: " + e.getMessage(), e);
         }
@@ -23,7 +30,6 @@ public class ChromeManager {
     public static WebDriver chromeManagerRemote(){
         WebDriver driver;
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         capabilities.setCapability("browserName", "chrome");//map.get("Browser") || String browser
         // capabilities.setCapability("browserVersion", "114.0");   // Usa "browserVersion" en lugar de "chromeVersion"
         capabilities.setCapability("acceptInsecureCerts", true);

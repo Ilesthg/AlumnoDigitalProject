@@ -5,6 +5,7 @@ import enums.ExplicitWaitStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pages.homepage.HomePageAD;
 import utilities.CustomMethods;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public final class LoginPageAD extends CustomMethods {
     private static final By linkCtrlEscolar = By.xpath("//ul[@id='ic-menu']//a[@href='#']");
     private static final String LINKCONTROLESCOLAR = "Link Control Escolar";
 
-    private static final By messages = By.xpath("//div[@id= 'toast-container']//div[@class = 'toast toast-warning']");
+    private static final By messages = By.xpath("//div[@id= 'toast-container']/div/button");
 
 
     private static final By mandatoryUsername = By.xpath("//span[@id='ContentPlaceHolder1_Login2_UserNameRequired']");
@@ -66,11 +67,13 @@ public final class LoginPageAD extends CustomMethods {
     }
 
     public void closeMessages() {
-
+        //switchToAlertAndAccept();
         List<WebElement> elementList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(messages));
 
         for (int i = 0; i < elementList.size(); i++) {
+            System.out.println( elementList.get(i).getText());
             elementList.get(i).click();
+            click(elementList.get(i), elementList.get(i).getText());
         }
     }
 

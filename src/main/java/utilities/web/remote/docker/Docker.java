@@ -1,4 +1,4 @@
-package base;
+package utilities.web.remote.docker;
 
 import constants.Constants;
 import enums.Browsers;

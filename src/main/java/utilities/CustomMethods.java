@@ -7,10 +7,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import enums.ExplicitWaitStrategy;
 import org.apache.commons.math3.analysis.function.Sin;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -51,6 +48,15 @@ public class CustomMethods {
             ExtentLogger.passMessage("Send Keys Method SUCCESS, able to send key on element: ->" + element +" with value: ->" + valueToSend);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send keys to element located by: " + by, e);
+        }
+    }
+    protected void click(WebElement webElement,String element) {
+        try {
+            webElement.click();
+            //  System.out.println("Click Method SUCCESS, able to click key on element: ->" + element);
+            ExtentLogger.passMessage("Click Method SUCCESS, able to click key on element: ->" + element);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to click on element located by: " + webElement, e);
         }
     }
 
@@ -103,6 +109,15 @@ public class CustomMethods {
             throw new RuntimeException("Failed to get text on element located by: " + by, e);
         }
     }
+  /*  protected void switchToAlertAndAccept() {
+        try {
+            Alert alert = driver.switchTo().alert();
+            // Accept the alert
+            alert.accept();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to accept alert", e);
+        }
+    }*/
 
     protected Boolean isDisplayed(By by) {
         boolean flag;

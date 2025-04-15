@@ -10,17 +10,17 @@
 
     <test name="Test ">
         <classes>
-            <class name="org.tests.LoginADTest">
+         <!--   <class name="org.tests.LoginADTest">
                 <methods>
                     <include name="validLoginTest"/>
                     <include name="invalidLoginTest"/>
                 </methods>
-            </class>
-          <!--  <class name="org.tests.HomePageADTest">
+            </class>-->
+            <class name="org.tests.HomePageADTest">
                 <methods>
                     <include name="validHomePageTest"/>
                 </methods>
-            </class>-->
+            </class>
 
         </classes>
     </test>

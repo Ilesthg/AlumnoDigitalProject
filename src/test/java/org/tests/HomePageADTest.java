@@ -1,9 +1,10 @@
 package org.tests;
 
 import base.BaseDriver;
-import pages.HomePageAD;
 import pages.LoginPageAD;
 import org.testng.annotations.Test;
+import pages.homepage.enums.MENUS;
+import pages.homepage.enums.SUBMENU;
 import utilities.DataProviderFiltered;
 
 import java.util.HashMap;
@@ -16,11 +17,12 @@ public final class HomePageADTest extends BaseDriver {
     @Test( dataProvider = "DataFiltered", dataProviderClass = DataProviderFiltered.class)
     public void validHomePageTest(HashMap<String, String> data){
 
-        LoginPageAD loginPageAD = new LoginPageAD();
-        loginPageAD.validLogin(data);
+       new LoginPageAD()
+               .validLogin(data)
+               .clickMenu(MENUS.CAPTURAS)
+               .clickSubMenu(SUBMENU.ACTUALIZACION_DE_DATOS_PADRES);
 
-        HomePageAD homePageAD = new HomePageAD();
-        homePageAD.getMenu("consultas");
+     //   homePageAD.clickMenu(MENUS.CONSULAS);
       //  loginPageAD.validLogin(data).getMenu("consultas");
 
     }

@@ -1,10 +1,10 @@
 package base;
 
+import base.webdrivers.WebDFactory;
 import constants.Constants;
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import base.mobiledrivers.MobileDFactory;
 
 public class BaseDriver {
     protected BaseDriver() {
@@ -15,7 +15,9 @@ public class BaseDriver {
 
     @BeforeMethod
     protected void initDriver() {
-        WebDriver driver = BrowserFactory.generateWebDriver();
+        WebDriver driver = WebDFactory.generateWebDriver();
+
+
         ParallelDriver.getInstanceParallelDriver().setWebDriver(driver);
         this.driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
         this.driver.get(Constants.getUrl());
@@ -26,6 +28,9 @@ public class BaseDriver {
     protected void closeDriver() {
         ParallelDriver.getInstanceParallelDriver().closeWebDriver();
 
+    }
+    protected String getUrl() {
+        return Constants.getUrl();
     }
 
   /*  public static WebDriver getWeb(){
