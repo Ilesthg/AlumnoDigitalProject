@@ -22,7 +22,7 @@ public final class BajaAlumnoTest extends BaseDriver {
     }
 
 
-    @DataProvider(name = "ValidDataFixtures")
+/*    @DataProvider(name = "ValidDataFixtures")
     public Object[] validDataProvider(Method m) {
         List<Object> bajaAlumnoPOJO = Fixture.from(BajaAlumnoTemplate.class).gimme(2, "valid");
         return new Object[]{
@@ -30,12 +30,15 @@ public final class BajaAlumnoTest extends BaseDriver {
         };
 
     }
+
+ */
     @Test( dataProvider = "DataFiltered", dataProviderClass = DataProviderFiltered.class)
     public void validBajaAlumno(HashMap<String, String> data, BajaAlumnoPOJO bajaAlumnos) {
 
         new LoginPageAD()
                 .validLogin(data)
                 .navigateToBajaAlumno()
+                .changeToCurp()
                 .fillData(bajaAlumnos);
 
 

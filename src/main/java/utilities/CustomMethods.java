@@ -1,22 +1,16 @@
 package utilities;
 
 import base.ParallelDriver;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import enums.ExplicitWaitStrategy;
-import org.apache.commons.math3.analysis.function.Sin;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import reportss.ExtentLogger;
-import reportss.ExtentReportsClass;
-import reportss.SingletonExtentTest;
 
 import java.time.Duration;
+import java.util.function.Consumer;
 
 public class CustomMethods {
     // private final WebDriver driver2 = ParallelDriver.getInstanceParallelDriver().getWebDriver();
@@ -30,28 +24,28 @@ public class CustomMethods {
 
     }
 
-    protected  void sendKeys(By by, String valueToSend,String element) {
+    protected void sendKeys(By by, String valueToSend, String element) {
         try {
-              //WebDriver driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
+            //WebDriver driver = ParallelDriver.getInstanceParallelDriver().getWebDriver();
             driver.findElement(by).sendKeys(valueToSend);
-            ExtentLogger.passMessage("Send Keys Method SUCCESS, able to send key on element: ->" + element +" with value: ->" + valueToSend);
-          //  logger.log(Status.PASS, MarkupHelper.createLabel("Send Keys Method SUCCESS, able to send key on element: ->" + element + " with value: ->" + valueToSend, ExtentColor.GREEN));
+            ExtentLogger.passMessage("Send Keys Method SUCCESS, able to send key on element: ->" + element + " with value: ->" + valueToSend);
+            //  logger.log(Status.PASS, MarkupHelper.createLabel("Send Keys Method SUCCESS, able to send key on element: ->" + element + " with value: ->" + valueToSend, ExtentColor.GREEN));
 
         } catch (NullPointerException e) {
             throw new RuntimeException("Failed to send keys to element located by: " + by, e);
         }
     }
 
-    protected void sendKeys(By by, String valueToSend,String element , ExplicitWaitStrategy explicitWaitStrategy) {
+    protected void sendKeys(By by, String valueToSend, String element, ExplicitWaitStrategy explicitWaitStrategy) {
         try {
             waitStrategy(by, explicitWaitStrategy).sendKeys(valueToSend);//2 option
-            ExtentLogger.passMessage("Send Keys Method SUCCESS, able to send key on element: ->" + element +" with value: ->" + valueToSend);
+            ExtentLogger.passMessage("Send Keys Method SUCCESS, able to send key on element: ->" + element + " with value: ->" + valueToSend);
         } catch (Exception e) {
             throw new RuntimeException("Failed to send keys to element located by: " + by, e);
         }
     }
 
-    protected void click(WebElement webElement,String element) {
+    protected void click(WebElement webElement, String element) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(webElement)).click();
             //  System.out.println("Click Method SUCCESS, able to click key on element: ->" + element);
@@ -62,10 +56,10 @@ public class CustomMethods {
     }
 
 
-    protected void click(By by,String element) {
+    protected void click(By by, String element) {
         try {
             driver.findElement(by).click();
-          //  System.out.println("Click Method SUCCESS, able to click key on element: ->" + element);
+            //  System.out.println("Click Method SUCCESS, able to click key on element: ->" + element);
             ExtentLogger.passMessage("Click Method SUCCESS, able to click key on element: ->" + element);
         } catch (Exception e) {
             throw new RuntimeException("Failed to click on element located by: " + by, e);
@@ -73,7 +67,7 @@ public class CustomMethods {
     }
 
 
-    protected void click(By by,String element, ExplicitWaitStrategy explicitWaitStrategy) {
+    protected void click(By by, String element, ExplicitWaitStrategy explicitWaitStrategy) {
         try {
             waitStrategy(by, explicitWaitStrategy).click();
             ExtentLogger.passMessage("Click Method SUCCESS, able to click key on element: ->" + element);
@@ -145,16 +139,33 @@ public class CustomMethods {
         }
     }
 
-    protected static void selectDropDownByVisibleText(WebElement webElement, String elementName, String visibleText) {
+    protected static void selectDropDownByVisibleText(WebElement selectWebElement, String elementName, String visibleText) {
         try {
-            Select s = new Select(webElement);
+            Select s = new Select(selectWebElement);
             s.selectByVisibleText(visibleText);
-            // logger.log(Status.PASS, MarkupHelper.createLabel("Select DD by Visible Text method SUCCESS,: " + elementName, ExtentColor.GREEN));
+
+            ExtentLogger.passMessage("Select DD by Visible Text method SUCCESS,: " + elementName);
         } catch (Exception e) {
+            ExtentLogger.failMessage("Select DD by Visible Text method FAILED,: " + elementName + " due to exception: " + e);
             throw new RuntimeException(e);
-            //  logger.log(Status.FAIL, MarkupHelper.createLabel("Select DD by Visible Text method FAILED,: " + elementName + " due to exception: " + e, ExtentColor.RED));
         }
     }
+
+    protected static void consumerSelect(WebElement selectWebElement, Consumer<Select> consumer) {
+        consumer.accept(new Select(selectWebElement));
+
+    }
+
+    public  WebElement  returnWebElement(By by){
+        WebElement element = null;
+        try {
+            element = driver.findElement(by);
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Element not found: " + by, e);
+        }
+        return element;
+    }
+
 
     private WebElement waitStrategy(By by, ExplicitWaitStrategy explicitWaitStrategy) {
         WebElement element = null;

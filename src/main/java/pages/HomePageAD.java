@@ -36,21 +36,8 @@ public final class HomePageAD extends CustomMethods {
         return new BajaAlumnos();
     }
 
- /*   private static By getXPathWith(String xpath, Object... replacement) {
-        String resolvedXPath = String.format(xpath, replacement);
-        return By.xpath(resolvedXPath);
 
-    }
 
-    public HomePageAD clickMenu(MENUS menus) {
-        click(getXPathWith(menu, menus.getName()), menus.getName(), ExplicitWaitStrategy.CLICKABLE); // to lower case is used to normalize the DOM
-        return this;
-    }
-
-    public void clickSubMenu(SUBMENU subMenuFromTest) {//MENUS menuFromTest,
-        //clickMenu(menuFromTest);
-        click(getXPathWith(subMenu, subMenuFromTest.getName()), subMenuFromTest.getName(), ExplicitWaitStrategy.CLICKABLE);
-    }*/
 
 /*
   public void clickMenu(String menu) {

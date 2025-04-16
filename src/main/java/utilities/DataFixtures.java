@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public final class DataFixtures {
-   /* @DataProvider(name = "ValidDataFixtures")
+    @DataProvider(name = "ValidDataFixtures")
     public Object[] validDataProvider(Method m) {
 
 
@@ -27,5 +27,5 @@ public final class DataFixtures {
                 bajaAlumnoPOJO.toArray()
         };
 
-    }*/
+    }
 }
