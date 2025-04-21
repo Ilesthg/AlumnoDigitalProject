@@ -1,14 +1,16 @@
 package pages;
 
-import fixtures.model.BajaAlumnoPOJO;
+import enums.ExplicitWaitStrategy;
+import fixtures.model.BajaAlumnosPOJO;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.enums.MENUS;
 import pages.enums.SUBMENU;
 import pages.page_components.TopMenuComponent;
 import utilities.CustomMethods;
 
-public final class BajaAlumnos extends CustomMethods {
+public final class BajaAlumnosPage extends CustomMethods {
 
     private static final By PRIMER_APELLIDO_INPUT_BOX = By.xpath("//input[@id='ContentPlaceHolder1_txtApellidoPaternoBusqueda']");
     private static final By SEGUNDO_APELLIDO_INPUT_BOX = By.xpath("//input[@id='ContentPlaceHolder1_txtApellidoMaternoBusqueda']");
@@ -18,7 +20,7 @@ public final class BajaAlumnos extends CustomMethods {
 
     private final TopMenuComponent topMenuComponent;
 
-    public BajaAlumnos() {
+    public BajaAlumnosPage() {
         this.topMenuComponent = new TopMenuComponent();
     }
 
@@ -29,7 +31,7 @@ public final class BajaAlumnos extends CustomMethods {
 
 
     private void setPrimerApellido(String primerApellido) {
-        sendKeys(PRIMER_APELLIDO_INPUT_BOX, primerApellido, "Primer Apellido");
+        sendKeys(PRIMER_APELLIDO_INPUT_BOX, primerApellido, "Primer Apellido", ExplicitWaitStrategy.PRESENT);
     }
 
     private void setSegundoApellidoInputBox(String segundoApellido) {
@@ -37,7 +39,7 @@ public final class BajaAlumnos extends CustomMethods {
     }
 
     private void setNombreInputBox(String nombre) {
-        sendKeys(NOMBRE_INPUT_BOX, nombre, "Nombre");
+        sendKeys(NOMBRE_INPUT_BOX, nombre, "Nombre", ExplicitWaitStrategy.PRESENT);
     }
 
     private void setCurpInputBox(String curp) {
@@ -45,27 +47,28 @@ public final class BajaAlumnos extends CustomMethods {
     }
 
 
-    public BajaAlumnos changeToCurp() {
-       consumerSelect(returnWebElement(SELECT_WEB_ELEMENT), select -> {
+    public BajaAlumnosPage deleteWithCURP() {
+        consumerSelect(returnWebElement(SELECT_WEB_ELEMENT), select -> {
             select.selectByVisibleText("CURP");
         });
-       return this;
+        return this;
     }
 
-    private void fillDataNombre(BajaAlumnoPOJO bajaAlumnoPOJO) {
+    private void fillDataNombre(BajaAlumnosPOJO bajaAlumnoPOJO) {
         setPrimerApellido(bajaAlumnoPOJO.getPrimerApellido());
         setSegundoApellidoInputBox(bajaAlumnoPOJO.getSegundoApellido());
         setNombreInputBox(bajaAlumnoPOJO.getNombre());
 
     }
 
-    private void fillDataCurp(BajaAlumnoPOJO bajaAlumnoPOJO) {
+    private void fillDataCurp(BajaAlumnosPOJO bajaAlumnoPOJO) {
         setCurpInputBox(bajaAlumnoPOJO.getCurp());
     }
 
-    public void fillData(BajaAlumnoPOJO bajaAlumnoPOJO) {
-        Select select = new Select(driver.findElement(SELECT_WEB_ELEMENT));
-        if ((select.getFirstSelectedOption().getText().equals("Nombre"))) {
+    public void fillData(BajaAlumnosPOJO bajaAlumnoPOJO) {
+        Select select = new Select(wait.until(ExpectedConditions.presenceOfElementLocated(SELECT_WEB_ELEMENT)));
+
+        if ((select.getFirstSelectedOption().getText().equalsIgnoreCase("Nombre"))) {
             fillDataNombre(bajaAlumnoPOJO);
         } else {
             fillDataCurp(bajaAlumnoPOJO);

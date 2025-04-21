@@ -26,6 +26,7 @@
     <appium.java.version>8.3.0</appium.java.version>
     <lombok.version>1.18.28</lombok.version>
     <fixture.version>3.0.0</fixture.version>
+    <faker.version>1.0.2</faker.version>
   </properties>
 
 
@@ -174,9 +175,14 @@
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>${lombok.version}</version>
+        <scope>provided</scope>
       </dependency>
 
-
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>${faker.version}</version>
+    </dependency>
 
   </dependencies>
 

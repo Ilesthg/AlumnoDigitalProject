@@ -30,10 +30,10 @@ public final class HomePageAD extends CustomMethods {
                 .clickSubMenu(SUBMENU.ACTUALIZACION_DE_DATOS_PADRES);
     }
 
-    public BajaAlumnos navigateToBajaAlumno(){
+    public BajaAlumnosPage navigateToBajaAlumno(){
         topMenuComponent.clickMenu(MENUS.CAPTURAS);
         topMenuComponent.clickSubMenu(SUBMENU.BAJA_ALUMNO);
-        return new BajaAlumnos();
+        return new BajaAlumnosPage();
     }
 
 

@@ -1,7 +1,7 @@
 package utilities;
 
 import br.com.six2six.fixturefactory.Fixture;
-import fixtures.model.BajaAlumnoPOJO;
+import fixtures.model.BajaAlumnosPOJO;
 import org.testng.annotations.DataProvider;
 import utilities.datareader.ExcelReader;
 
@@ -56,12 +56,15 @@ public class DataProviderFiltered {
             }
         }
 
-
+        System.out.println("end result size = " + endResult.size());
         Object[][] combinedData = new Object[endResult.size()][2];
 
         //data from fixture
-        List<BajaAlumnoPOJO> fixtureData = Fixture.from(BajaAlumnoPOJO.class).gimme(2, "valid");
+        //List<BajaAlumnosPOJO> fixtureData = Fixture.from(BajaAlumnosPOJO.class).gimme(2, "invalid");   //Data coming from Fixture
+        List<BajaAlumnosPOJO> fixtureData = XSLXFileReader.returnDataExcel(); //Data coming from External File
 
+
+        System.out.println(fixtureData);
         for (int i = 0; i < endResult.size(); i++) {
             combinedData[i][0] = endResult.get(i); // First parameter: existing data
             combinedData[i][1] = fixtureData.get(i % fixtureData.size()); // Second parameter: fixture data

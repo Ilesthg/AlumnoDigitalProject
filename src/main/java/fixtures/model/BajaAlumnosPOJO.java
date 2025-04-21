@@ -1,23 +1,24 @@
 package fixtures.model;
 
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 
 @Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public  class BajaAlumnoPOJO {
+@ToString
+public  class BajaAlumnosPOJO {
 
 
     private String primerApellido;
     private String segundoApellido;
     private String nombre;
     private String curp;
+
+
     public String getPrimerApellido() {
         return primerApellido;
     }
@@ -29,7 +30,6 @@ public  class BajaAlumnoPOJO {
     public String getNombre() {
         return nombre;
     }
-
     public String getCurp() {
         return curp;
     }

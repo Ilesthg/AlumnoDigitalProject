@@ -3,25 +3,31 @@ package fixtures.template;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import fixtures.model.BajaAlumnoPOJO;
+import fixtures.model.BajaAlumnosPOJO;
+import org.testng.internal.junit.ArrayAsserts;
+
+import java.util.Arrays;
 
 public class BajaAlumnoTemplate implements TemplateLoader {
 
     @Override
     public void load() {
-        // Define the template for the BajaAlumnoPOJO class
-        // This is where you would define how to create instances of BajaAlumnoPOJO
+        // Define the template for the BajaAlumnosPOJO class
+        // This is where you would define how to create instances of BajaAlumnosPOJO
         // using the FixtureFactory library.
         // Example:
 
         //controls data we are passing
-        Fixture.of(BajaAlumnoPOJO.class).addTemplate("valid", new Rule() {{
+        Fixture.of(BajaAlumnosPOJO.class).addTemplate("valid", new Rule() {{
             add("primerApellido", "Doe");
             add("segundoApellido", "Smith");
             add("nombre", "John");
             add("curp", "DOES123456HDFRRT00");
         }});
+        Fixture.of(BajaAlumnosPOJO.class).addTemplate("invalid").inherits("valid", new Rule() {{
+            add("primerApellido",uniqueRandom("Doe", "Smith1", "Johnson_()*%"));
 
+        }});
 
 
     }
@@ -40,7 +46,7 @@ public class BajaAlumnoTemplate implements TemplateLoader {
     public void load() {
         // Use external data to populate the template
         for (HashMap<String, String> data : externalData) {
-            Fixture.of(BajaAlumnoPOJO.class).addTemplate("valid", new Rule() {{
+            Fixture.of(BajaAlumnosPOJO.class).addTemplate("valid", new Rule() {{
                 add("primerApellido", data.getOrDefault("primerApellido", "DefaultApellido"));
                 add("segundoApellido", data.getOrDefault("segundoApellido", "DefaultApellido"));
                 add("nombre", data.getOrDefault("nombre", "DefaultNombre"));
@@ -70,7 +76,7 @@ public class BajaAlumnoTemplate implements TemplateLoader {
     }
 
     // Create a single template with random selection from the collected values
-    Fixture.of(BajaAlumnoPOJO.class).addTemplate("valid", new Rule() {{
+    Fixture.of(BajaAlumnosPOJO.class).addTemplate("valid", new Rule() {{
         add("primerApellido", random(primerApellidos.toArray()));
         add("segundoApellido", random(segundoApellidos.toArray()));
         add("nombre", random(nombres.toArray()));
